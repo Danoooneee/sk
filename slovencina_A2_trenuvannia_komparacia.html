@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slovenčina A2 — тренування: komparácia adjektív</title>
+  <style>
+    :root {
+      --bg: #f6f3ea;
+      --card: #fffaf0;
+      --ink: #1f2933;
+      --muted: #64748b;
+      --line: #e6ddc8;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --good: #16a34a;
+      --bad: #dc2626;
+      --warn: #d97706;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(31, 41, 51, 0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 34rem),
+        radial-gradient(circle at top right, rgba(217, 119, 6, 0.10), transparent 30rem),
+        var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 52px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(255,250,240,0.94), rgba(255,255,255,0.86));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      right: -95px;
+      top: -100px;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    button, .ghost-btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 15px;
+    }
+
+    button.primary {
+      background: var(--accent);
+      color: var(--white);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.24);
+    }
+
+    button.secondary {
+      background: #111827;
+      color: var(--white);
+    }
+
+    button.light {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.98);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 24px; }
+    }
+
+    .card {
+      background: rgba(255,250,240,0.94);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p.note {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .rule {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .formula {
+      padding: 13px 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 22px 0 16px;
+      position: sticky;
+      top: 8px;
+      z-index: 5;
+      padding: 8px;
+      border-radius: 18px;
+      background: rgba(246,243,234,0.84);
+      backdrop-filter: blur(12px);
+    }
+
+    .tab {
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 14px;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .exercise {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 17px;
+      margin: 12px 0;
+    }
+
+    .exercise strong {
+      display: block;
+      margin-bottom: 9px;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      border: 1.5px solid #d6ccba;
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 16px;
+      background: #fff;
+      outline: none;
+    }
+
+    input[type="text"]:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+    .inline-input {
+      display: inline-block;
+      width: min(240px, 100%);
+      margin: 4px 4px;
+      vertical-align: middle;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr) minmax(150px, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin-top: 9px;
+    }
+
+    @media (max-width: 700px) {
+      .row { grid-template-columns: 1fr; }
+    }
+
+    .radio-group {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    label.choice {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fffaf0;
+      cursor: pointer;
+    }
+
+    .feedback {
+      margin-top: 9px;
+      font-weight: 800;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .ok { color: var(--good); }
+    .no { color: var(--bad); }
+
+    .correct {
+      border-color: rgba(22, 163, 74, 0.65) !important;
+      background: rgba(22, 163, 74, 0.06) !important;
+    }
+
+    .incorrect {
+      border-color: rgba(220, 38, 38, 0.65) !important;
+      background: rgba(220, 38, 38, 0.06) !important;
+    }
+
+    .score-box {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      background: #111827;
+      color: #fff;
+    }
+
+    .score-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-weight: 900;
+    }
+
+    .bar {
+      height: 13px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar > div {
+      height: 100%;
+      width: 0%;
+      background: #60a5fa;
+      transition: width 0.35s ease;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #fff;
+      margin-top: 10px;
+    }
+
+    .mini-table th, .mini-table td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .mini-table th {
+      background: #f1efe7;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #f1efe7;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .answer-key {
+      display: none;
+      margin-top: 12px;
+      padding: 15px;
+      border-radius: 16px;
+      border: 1px dashed #b6a98d;
+      background: #fffdf8;
+    }
+
+    .answer-key.show { display: block; }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .print-only { display: none; }
+
+    @media print {
+      body { background: #fff; }
+      .tabs, .top-actions, button, .score-box { display: none !important; }
+      .section { display: block !important; page-break-inside: avoid; }
+      .card, .hero, .exercise { box-shadow: none; }
+      .print-only { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <span class="badge">Slovenčina A2 · praktické cvičenia</span>
+      <h1>Тренування з перевіркою: komparácia adjektív</h1>
+      <p class="lead">
+        Практичний сайт для підготовки: ступені порівняння прикметників, опис кімнати,
+        сім’я, здоров’я, подорожі, покупки та базові речення словацькою.
+      </p>
+      <div class="top-actions">
+        <button class="primary" onclick="checkAll()">Перевірити все</button>
+        <button class="secondary" onclick="showAllAnswers()">Показати відповіді</button>
+        <button class="light" onclick="resetAll()">Очистити</button>
+        <button class="light" onclick="window.print()">Друк / PDF</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <aside class="card">
+        <h2>Шпаргалка</h2>
+        <p class="note">Перед вправами швидко повтори головні правила.</p>
+
+        <div class="rule">
+          <div class="formula">pozitív: taký / taká / také + adjektívum + ako</div>
+          <div class="formula">komparatív: starší / krajšia / väčšie + ako / než</div>
+          <div class="formula">superlatív: naj + komparatív → najstarší</div>
+        </div>
+
+        <table class="mini-table">
+          <thead>
+            <tr><th>Pozitív</th><th>Komparatív</th><th>Superlatív</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>dobrý</td><td>lepší</td><td>najlepší</td></tr>
+            <tr><td>zlý</td><td>horší</td><td>najhorší</td></tr>
+            <tr><td>veľký</td><td>väčší</td><td>najväčší</td></tr>
+            <tr><td>malý</td><td>menší</td><td>najmenší</td></tr>
+            <tr><td>vysoký</td><td>vyšší</td><td>najvyšší</td></tr>
+            <tr><td>pekný</td><td>krajší</td><td>najkrajší</td></tr>
+          </tbody>
+        </table>
+      </aside>
+
+      <aside class="card">
+        <h2>Результат</h2>
+        <p class="note">Натисни «Перевірити все», і сайт покаже помилки та правильні відповіді.</p>
+        <div class="score-box">
+          <div class="score-title">
+            <span>Твій бал</span>
+            <span id="scoreText">0 / 0</span>
+          </div>
+          <div class="bar"><div id="scoreBar"></div></div>
+          <div id="scoreComment" class="small" style="color: rgba(255,255,255,0.78);">
+            Заповни вправи й натисни перевірку.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab active" onclick="openSection('s1', this)">1. Таблиця</button>
+      <button class="tab" onclick="openSection('s2', this)">2. Речення</button>
+      <button class="tab" onclick="openSection('s3', this)">3. Тест</button>
+      <button class="tab" onclick="openSection('s4', this)">4. Словник</button>
+      <button class="tab" onclick="openSection('s5', this)">5. Переклад</button>
+    </nav>
+
+    <main>
+      <section id="s1" class="section active card">
+        <h2>1. Доповни таблицю</h2>
+        <p class="note">Пиши словацькою. Довгі/мʼякі знаки важливі: vyšší, väčší, najťažší.</p>
+
+        <div class="exercise">
+          <strong>1. vysoký — ? — ?</strong>
+          <div class="row">
+            <span class="pill">pozitív: vysoký</span>
+            <input data-answer="vyšší" type="text" placeholder="komparatív" />
+            <input data-answer="najvyšší" type="text" placeholder="superlatív" />
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>2. ? — horší — ?</strong>
+          <div class="row">
+            <input data-answer="zlý" type="text" placeholder="pozitív" />
+            <span class="pill">komparatív: horší</span>
+            <input data-answer="najhorší" type="text" placeholder="superlatív" />
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>3. mladá — ? — ?</strong>
+          <div class="row">
+            <span class="pill">pozitív: mladá</span>
+            <input data-answer="mladšia" type="text" placeholder="komparatív, ženský rod" />
+            <input data-answer="najmladšia" type="text" placeholder="superlatív, ženský rod" />
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>4. dobré — ? — ?</strong>
+          <div class="row">
+            <span class="pill">pozitív: dobré</span>
+            <input data-answer="lepšie" type="text" placeholder="komparatív, stredný rod" />
+            <input data-answer="najlepšie" type="text" placeholder="superlatív, stredný rod" />
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>5. ťažký — ? — ?</strong>
+          <div class="row">
+            <span class="pill">pozitív: ťažký</span>
+            <input data-answer="ťažší" type="text" placeholder="komparatív" />
+            <input data-answer="najťažší" type="text" placeholder="superlatív" />
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <button class="primary" onclick="checkSection('s1')">Перевірити цей розділ</button>
+        <button class="light" onclick="toggleKey('key1')">Відповіді</button>
+        <div id="key1" class="answer-key">
+          1. vyšší, najvyšší · 2. zlý, najhorší · 3. mladšia, najmladšia ·
+          4. lepšie, najlepšie · 5. ťažší, najťažší
+        </div>
+      </section>
+
+      <section id="s2" class="section card">
+        <h2>2. Встав правильну форму</h2>
+        <p class="note">Дивись на рід: Milan = mužský, Martina = ženský, izba = ženský rod.</p>
+
+        <div class="exercise">
+          <strong>1. Milan je naj______ žiak z triedy. / vysoký /</strong>
+          <input data-answer="najvyšší" type="text" placeholder="Відповідь" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>2. Peter je ______ ako Milan. / vysoký /</strong>
+          <input data-answer="vyšší" type="text" placeholder="Відповідь" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>3. Martina je ______ ako Peter. / nízka /</strong>
+          <input data-answer="nižšia" type="text" placeholder="Відповідь" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>4. Táto izba je ______ ako moja izba. / veľká /</strong>
+          <input data-answer="väčšia" type="text" placeholder="Відповідь" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>5. Moja obývačka je ______ než študentská izba. / pohodlná /</strong>
+          <input data-answer="pohodlnejšia" type="text" placeholder="Відповідь" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>6. Tento obraz je ______ zo všetkých. / pekný /</strong>
+          <input data-answer="najkrajší" type="text" placeholder="Відповідь" />
+          <div class="feedback"></div>
+        </div>
+
+        <button class="primary" onclick="checkSection('s2')">Перевірити цей розділ</button>
+        <button class="light" onclick="toggleKey('key2')">Відповіді</button>
+        <div id="key2" class="answer-key">
+          1. najvyšší · 2. vyšší · 3. nižšia · 4. väčšia · 5. pohodlnejšia · 6. najkrajší
+        </div>
+      </section>
+
+      <section id="s3" class="section card">
+        <h2>3. Вибери правильну відповідь</h2>
+        <p class="note">Тут тільки одна правильна відповідь.</p>
+
+        <div class="exercise" data-radio-answer="b">
+          <strong>1. Robert má 49 rokov. Karol má 27 rokov. Robert je...</strong>
+          <div class="radio-group">
+            <label class="choice"><input type="radio" name="q1" value="a"> mladší ako Karol</label>
+            <label class="choice"><input type="radio" name="q1" value="b"> starší ako Karol</label>
+            <label class="choice"><input type="radio" name="q1" value="c"> najmladší</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise" data-radio-answer="c">
+          <strong>2. Zuzana má 70 rokov, Robert 49, Karol 27. Zuzana je...</strong>
+          <div class="radio-group">
+            <label class="choice"><input type="radio" name="q2" value="a"> mladšia ako Robert</label>
+            <label class="choice"><input type="radio" name="q2" value="b"> taká stará ako Karol</label>
+            <label class="choice"><input type="radio" name="q2" value="c"> najstaršia</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise" data-radio-answer="a">
+          <strong>3. Moja izba je 10 m², tvoja izba je 16 m². Tvoja izba je...</strong>
+          <div class="radio-group">
+            <label class="choice"><input type="radio" name="q3" value="a"> väčšia ako moja</label>
+            <label class="choice"><input type="radio" name="q3" value="b"> menšia ako moja</label>
+            <label class="choice"><input type="radio" name="q3" value="c"> najmenšia</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise" data-radio-answer="b">
+          <strong>4. dobrý → komparatív je...</strong>
+          <div class="radio-group">
+            <label class="choice"><input type="radio" name="q4" value="a"> dobrší</label>
+            <label class="choice"><input type="radio" name="q4" value="b"> lepší</label>
+            <label class="choice"><input type="radio" name="q4" value="c"> najlepší</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise" data-radio-answer="c">
+          <strong>5. zlý → superlatív je...</strong>
+          <div class="radio-group">
+            <label class="choice"><input type="radio" name="q5" value="a"> zlší</label>
+            <label class="choice"><input type="radio" name="q5" value="b"> horší</label>
+            <label class="choice"><input type="radio" name="q5" value="c"> najhorší</label>
+          </div>
+          <div class="feedback"></div>
+        </div>
+
+        <button class="primary" onclick="checkSection('s3')">Перевірити цей розділ</button>
+        <button class="light" onclick="toggleKey('key3')">Відповіді</button>
+        <div id="key3" class="answer-key">
+          1. starší ako Karol · 2. najstaršia · 3. väčšia ako moja · 4. lepší · 5. najhorší
+        </div>
+      </section>
+
+      <section id="s4" class="section card">
+        <h2>4. Словник: кімната, здоров’я, подорожі</h2>
+        <p class="note">Встав словацьке слово. Можна писати без великої букви.</p>
+
+        <div class="exercise">
+          <strong>1. вітальня =</strong>
+          <input data-answer="obývačka" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>2. У мене болить голова = ______ ma hlava.</strong>
+          <input data-answer="bolí" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>3. квиток туди-назад = ______ lístok</strong>
+          <input data-answer="spiatočný" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>4. Біля вікна = ______ okne</strong>
+          <input data-answer="pri" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>5. аптека =</strong>
+          <input data-answer="lekáreň" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <button class="primary" onclick="checkSection('s4')">Перевірити цей розділ</button>
+        <button class="light" onclick="toggleKey('key4')">Відповіді</button>
+        <div id="key4" class="answer-key">
+          1. obývačka · 2. bolí · 3. spiatočný · 4. pri · 5. lekáreň
+        </div>
+      </section>
+
+      <section id="s5" class="section card">
+        <h2>5. Переклади речення словацькою</h2>
+        <p class="note">
+          Тут перевірка приймає конкретний варіант відповіді. Пиши без крапки в кінці.
+        </p>
+
+        <div class="exercise">
+          <strong>1. Петер вищий, ніж Мілан.</strong>
+          <input data-answer="Peter je vyšší ako Milan" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>2. Моя кімната більша, ніж твоя кімната.</strong>
+          <input data-answer="Moja izba je väčšia ako tvoja izba" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>3. У мене болить зуб.</strong>
+          <input data-answer="Bolí ma zub" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>4. Я хочу забронювати номер.</strong>
+          <input data-answer="Chcem si rezervovať izbu" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <div class="exercise">
+          <strong>5. Завтра я буду працювати.</strong>
+          <input data-answer="Zajtra budem pracovať" type="text" placeholder="Slovensky" />
+          <div class="feedback"></div>
+        </div>
+
+        <button class="primary" onclick="checkSection('s5')">Перевірити цей розділ</button>
+        <button class="light" onclick="toggleKey('key5')">Відповіді</button>
+        <div id="key5" class="answer-key">
+          1. Peter je vyšší ako Milan · 2. Moja izba je väčšia ako tvoja izba ·
+          3. Bolí ma zub · 4. Chcem si rezervovať izbu · 5. Zajtra budem pracovať
+        </div>
+      </section>
+    </main>
+
+    <p class="footer">Порада: якщо не проходить відповідь, перевір довгі знаки: á, é, í, ó, ú, ý, ä, ô, ľ, š, č, ž, ň.</p>
+  </div>
+
+  <script>
+    function normalize(value) {
+      return (value || "")
+        .trim()
+        .replace(/[.,!?;:]+$/g, "")
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+    }
+
+    function openSection(id, btn) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+      window.scrollTo({ top: document.querySelector(".tabs").offsetTop - 12, behavior: "smooth" });
+    }
+
+    function checkTextInput(input) {
+      const user = normalize(input.value);
+      const answers = String(input.dataset.answer || "")
+        .split("|")
+        .map(normalize);
+      const ok = answers.includes(user);
+      input.classList.remove("correct", "incorrect");
+      input.classList.add(ok ? "correct" : "incorrect");
+      return ok;
+    }
+
+    function setExerciseFeedback(exercise) {
+      const inputs = [...exercise.querySelectorAll('input[type="text"]')];
+      const radios = exercise.dataset.radioAnswer ? true : false;
+      const feedback = exercise.querySelector(".feedback");
+      let ok = true;
+      let total = 0;
+      let got = 0;
+
+      if (inputs.length) {
+        inputs.forEach(input => {
+          total++;
+          const inputOk = checkTextInput(input);
+          if (inputOk) got++;
+          if (!inputOk) ok = false;
+        });
+      }
+
+      if (radios) {
+        total++;
+        const answer = exercise.dataset.radioAnswer;
+        const selected = exercise.querySelector('input[type="radio"]:checked');
+        const selectedValue = selected ? selected.value : "";
+        const radioOk = selectedValue === answer;
+        got += radioOk ? 1 : 0;
+        ok = radioOk;
+
+        exercise.querySelectorAll("label.choice").forEach(label => {
+          label.classList.remove("correct", "incorrect");
+          const radio = label.querySelector("input");
+          if (radio.value === answer) label.classList.add("correct");
+          if (selected && radio.checked && radio.value !== answer) label.classList.add("incorrect");
+        });
+      }
+
+      if (feedback) {
+        if (got === total && total > 0) {
+          feedback.textContent = "Правильно ✅";
+          feedback.className = "feedback ok";
+        } else {
+          const correctTexts = inputs
+            .filter(i => !normalize(i.value) || !String(i.dataset.answer).split("|").map(normalize).includes(normalize(i.value)))
+            .map(i => i.dataset.answer.split("|")[0]);
+
+          if (radios && got === 0) {
+            feedback.textContent = "Помилка. Подивись правильний варіант, він підсвічений зеленим.";
+          } else if (correctTexts.length) {
+            feedback.textContent = "Помилка. Правильно: " + correctTexts.join(", ");
+          } else {
+            feedback.textContent = "Помилка. Спробуй ще раз.";
+          }
+          feedback.className = "feedback no";
+        }
+      }
+      return { got, total };
+    }
+
+    function checkSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      let got = 0;
+      let total = 0;
+      section.querySelectorAll(".exercise").forEach(ex => {
+        const res = setExerciseFeedback(ex);
+        got += res.got;
+        total += res.total;
+      });
+      updateScore();
+      return { got, total };
+    }
+
+    function checkAll() {
+      let got = 0;
+      let total = 0;
+      document.querySelectorAll(".section").forEach(section => {
+        section.querySelectorAll(".exercise").forEach(ex => {
+          const res = setExerciseFeedback(ex);
+          got += res.got;
+          total += res.total;
+        });
+      });
+      updateScore();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function updateScore() {
+      let got = 0;
+      let total = 0;
+
+      document.querySelectorAll(".exercise").forEach(ex => {
+        const inputs = [...ex.querySelectorAll('input[type="text"]')];
+        inputs.forEach(input => {
+          total++;
+          const answers = String(input.dataset.answer || "").split("|").map(normalize);
+          if (answers.includes(normalize(input.value))) got++;
+        });
+
+        if (ex.dataset.radioAnswer) {
+          total++;
+          const selected = ex.querySelector('input[type="radio"]:checked');
+          if (selected && selected.value === ex.dataset.radioAnswer) got++;
+        }
+      });
+
+      const percent = total ? Math.round((got / total) * 100) : 0;
+      document.getElementById("scoreText").textContent = got + " / " + total + " (" + percent + "%)";
+      document.getElementById("scoreBar").style.width = percent + "%";
+
+      let comment = "Заповни вправи й натисни перевірку.";
+      if (percent >= 90) comment = "Супер! Можна йти на тест 🔥";
+      else if (percent >= 70) comment = "Добре, але ще повтори неправильні форми.";
+      else if (percent >= 40) comment = "Нормальний старт. Повтори таблицю і зроби ще раз.";
+      else comment = "Почни зі шпаргалки зліва і тренуйся по одному розділу.";
+      document.getElementById("scoreComment").textContent = comment;
+    }
+
+    function toggleKey(id) {
+      document.getElementById(id).classList.toggle("show");
+    }
+
+    function showAllAnswers() {
+      document.querySelectorAll(".answer-key").forEach(key => key.classList.add("show"));
+    }
+
+    function resetAll() {
+      document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.value = "";
+        input.classList.remove("correct", "incorrect");
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      document.querySelectorAll("label.choice").forEach(l => l.classList.remove("correct", "incorrect"));
+      document.querySelectorAll(".feedback").forEach(f => {
+        f.textContent = "";
+        f.className = "feedback";
+      });
+      document.querySelectorAll(".answer-key").forEach(k => k.classList.remove("show"));
+      updateScore();
+    }
+
+    updateScore();
+  </script>
+</body>
+</html>
